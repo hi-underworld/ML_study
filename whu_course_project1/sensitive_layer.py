@@ -9,7 +9,7 @@ def sign(x):
         return 1
 
 train = np.loadtxt(open("train.csv","rb"),delimiter=",",skiprows=0)
-#test = np.loadtxt(open("/Users/yuxuanji/Desktop/ML_study/whu_course_project1/test.csv","rb"),delimiter=",",skiprows=0)
+test = np.loadtxt(open("test.csv","rb"),delimiter=",",skiprows=0)
 weights = np.zeros(784)
 bias = 0
 times = 200000
@@ -55,5 +55,11 @@ print('accuracy is %f' %((TP + TN) / 2000.0))
 print('precision is %f' %(TP / (TP + FP)))
 print('recall is %f' %(TP / (TP + FN)))
 
-
+#test process
+predict_labels = []
+for k in range(28000):
+    parameters = np.resize(test[k], (784,1))
+    predict_output = sign(weights.dot(parameters) + bias)
+    predict_labels.append(predict_output)
+print(predict_labels)
     
